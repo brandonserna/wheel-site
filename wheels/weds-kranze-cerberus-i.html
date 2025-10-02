@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weds Kranze Cerberus I | JDM Wheels Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        dark: '#0f172a',
+                        'dark-light': '#1e293b',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-dark via-dark-light to-slate-900 min-h-screen text-white">
+
+    <!-- Mobile Menu Toggle -->
+    <button id="mobileMenuBtn" class="fixed top-4 left-4 z-50 lg:hidden glass p-3 rounded-lg">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+    </button>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="fixed left-0 top-0 h-full w-80 glass border-r border-gray-700 z-40 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 overflow-y-auto">
+        <div class="p-6">
+            <h2 class="text-2xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-400 text-transparent bg-clip-text">JDM Wheels Archive</h2>
+            <p class="text-xs text-gray-400 mb-6">Classic & Discontinued Wheels</p>
+
+            <nav class="space-y-1">
+                <a href="../index.html" class="block px-4 py-2.5 rounded-lg hover:bg-white/5 text-gray-300 font-medium transition-all">
+                    🧮 Offset Calculator
+                </a>
+
+                <div class="mt-6">
+                    <h3 class="text-xs uppercase text-gray-500 font-semibold mb-2 px-4">Manufacturers</h3>
+
+                    <div class="space-y-1">
+                        <button onclick="toggleManufacturer('work')" class="w-full text-left px-4 py-2 rounded-lg hover:bg-white/5 transition-all flex items-center justify-between group">
+                            <span class="font-medium">Work Wheels</span>
+                            <svg class="w-4 h-4 transform transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                        <div id="work-wheels" class="hidden pl-4 space-y-1">
+                            <a href="work-vs-kf.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">VS-KF</a>
+                            <a href="work-vs-xx.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">VS-XX</a>
+                            <a href="work-meister-s1.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">Meister S1</a>
+                        </div>
+
+                        <button onclick="toggleManufacturer('weds')" class="w-full text-left px-4 py-2 rounded-lg bg-white/10 transition-all flex items-center justify-between group">
+                            <span class="font-medium">Weds / Kranze</span>
+                            <svg class="w-4 h-4 transform transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                        <div id="weds-wheels" class="pl-4 space-y-1">
+                            <a href="weds-kranze-cerberus-i.html" class="block px-4 py-2 text-sm bg-blue-500/20 border border-blue-500/30 text-blue-300 hover:bg-blue-500/30 rounded-lg transition-all">Kranze Cerberus I</a>
+                            <a href="weds-kranze-cerberus-ii.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">Kranze Cerberus II</a>
+                            <a href="weds-kranze-bazreia.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">Kranze Bazreia</a>
+                        </div>
+
+                        <button onclick="toggleManufacturer('ssr')" class="w-full text-left px-4 py-2 rounded-lg hover:bg-white/5 transition-all flex items-center justify-between group">
+                            <span class="font-medium">SSR</span>
+                            <svg class="w-4 h-4 transform transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                        <div id="ssr-wheels" class="hidden pl-4 space-y-1">
+                            <a href="ssr-professor-sp1.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">Professor SP1</a>
+                            <a href="ssr-professor-sp3.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">Professor SP3</a>
+                            <a href="ssr-vienna-merisia.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">Vienna Merisia</a>
+                        </div>
+
+                        <button onclick="toggleManufacturer('rays')" class="w-full text-left px-4 py-2 rounded-lg hover:bg-white/5 transition-all flex items-center justify-between group">
+                            <span class="font-medium">Rays Engineering</span>
+                            <svg class="w-4 h-4 transform transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                        <div id="rays-wheels" class="hidden pl-4 space-y-1">
+                            <a href="rays-volk-ce28n.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">Volk CE28N</a>
+                            <a href="rays-volk-gt-c.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">Volk GT-C</a>
+                        </div>
+
+                        <button onclick="toggleManufacturer('bbs')" class="w-full text-left px-4 py-2 rounded-lg hover:bg-white/5 transition-all flex items-center justify-between group">
+                            <span class="font-medium">BBS</span>
+                            <svg class="w-4 h-4 transform transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                        <div id="bbs-wheels" class="hidden pl-4 space-y-1">
+                            <a href="bbs-lm.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">LM</a>
+                            <a href="bbs-rs.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">RS</a>
+                        </div>
+
+                        <button onclick="toggleManufacturer('hotstuff')" class="w-full text-left px-4 py-2 rounded-lg hover:bg-white/5 transition-all flex items-center justify-between group">
+                            <span class="font-medium">Hotstuff</span>
+                            <svg class="w-4 h-4 transform transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                        <div id="hotstuff-wheels" class="hidden pl-4 space-y-1">
+                            <a href="hotstuff-stich-gulf.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">Stich Gulf</a>
+                            <a href="hotstuff-cross-speed.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">Cross Speed</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-6 border-t border-gray-700">
+                    <input type="text" id="wheelSearch" placeholder="Search wheels..."
+                           class="w-full px-4 py-2 rounded-lg bg-slate-800 border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none text-sm transition-all">
+                </div>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="lg:ml-80 min-h-screen">
+        <div class="container mx-auto px-4 py-8">
+
+            <!-- Header -->
+            <div class="max-w-5xl mx-auto fade-in">
+                <a href="../index.html" class="inline-flex items-center text-gray-400 hover:text-white mb-6 transition-all">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    Back to Calculator
+                </a>
+
+                <div class="glass rounded-3xl p-8 mb-8">
+                    <div class="flex items-start justify-between mb-6">
+                        <div>
+                            <h1 class="text-5xl font-bold mb-2 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-transparent bg-clip-text">
+                                Weds Kranze Cerberus I
+                            </h1>
+                            <p class="text-gray-400">Three-Piece Forged Wheel</p>
+                        </div>
+                        <span class="px-4 py-2 bg-red-500/20 border border-red-500/30 text-red-300 rounded-lg text-sm font-semibold">
+                            Discontinued
+                        </span>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-slate-800/50 rounded-xl p-4 border border-gray-700">
+                            <p class="text-xs text-gray-400 mb-1">Released</p>
+                            <p class="text-lg font-bold text-blue-400">2005</p>
+                        </div>
+                        <div class="bg-slate-800/50 rounded-xl p-4 border border-gray-700">
+                            <p class="text-xs text-gray-400 mb-1">Discontinued</p>
+                            <p class="text-lg font-bold text-purple-400">2010</p>
+                        </div>
+                        <div class="bg-slate-800/50 rounded-xl p-4 border border-gray-700">
+                            <p class="text-xs text-gray-400 mb-1">Construction</p>
+                            <p class="text-lg font-bold text-pink-400">3-Piece</p>
+                        </div>
+                        <div class="bg-slate-800/50 rounded-xl p-4 border border-gray-700">
+                            <p class="text-xs text-gray-400 mb-1">Material</p>
+                            <p class="text-lg font-bold text-green-400">Forged</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Information -->
+                <div class="grid md:grid-cols-2 gap-8">
+
+                    <!-- Specifications -->
+                    <div class="glass rounded-2xl p-6 fade-in" style="animation-delay: 0.1s">
+                        <h2 class="text-2xl font-bold mb-4 flex items-center">
+                            <span class="text-2xl mr-2">⚙️</span>
+                            Specifications
+                        </h2>
+
+                        <div class="space-y-4">
+                            <div>
+                                <h3 class="text-sm font-semibold text-gray-400 mb-2">Available Sizes</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-blue-500/20 border border-blue-500/30 rounded-lg text-sm">17"</span>
+                                    <span class="px-3 py-1 bg-blue-500/20 border border-blue-500/30 rounded-lg text-sm">18"</span>
+                                    <span class="px-3 py-1 bg-blue-500/20 border border-blue-500/30 rounded-lg text-sm">19"</span>
+                                    <span class="px-3 py-1 bg-blue-500/20 border border-blue-500/30 rounded-lg text-sm">20"</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h3 class="text-sm font-semibold text-gray-400 mb-2">Width Range</h3>
+                                <p class="text-white">8.0" - 12.0"</p>
+                            </div>
+
+                            <div>
+                                <h3 class="text-sm font-semibold text-gray-400 mb-2">Bolt Patterns</h3>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <span class="px-3 py-1 bg-slate-800/50 border border-gray-700 rounded text-sm">5x114.3</span>
+                                    <span class="px-3 py-1 bg-slate-800/50 border border-gray-700 rounded text-sm">5x120</span>
+                                    <span class="px-3 py-1 bg-slate-800/50 border border-gray-700 rounded text-sm">5x100</span>
+                                    <span class="px-3 py-1 bg-slate-800/50 border border-gray-700 rounded text-sm">5x112</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h3 class="text-sm font-semibold text-gray-400 mb-2">Offset Range</h3>
+                                <p class="text-white">-20mm to +60mm (custom available)</p>
+                            </div>
+
+                            <div>
+                                <h3 class="text-sm font-semibold text-gray-400 mb-2">Center Bore</h3>
+                                <p class="text-white">73mm (hub-centric rings available)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Design & Features -->
+                    <div class="glass rounded-2xl p-6 fade-in" style="animation-delay: 0.2s">
+                        <h2 class="text-2xl font-bold mb-4 flex items-center">
+                            <span class="text-2xl mr-2">🎨</span>
+                            Design & Features
+                        </h2>
+
+                        <div class="space-y-4">
+                            <div>
+                                <h3 class="text-sm font-semibold text-gray-400 mb-2">Face Types</h3>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center text-sm">
+                                        <span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                                        <span>Standard Face (Type-A)</span>
+                                    </li>
+                                    <li class="flex items-center text-sm">
+                                        <span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                                        <span>Step Face (Type-B)</span>
+                                    </li>
+                                    <li class="flex items-center text-sm">
+                                        <span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                                        <span>Deep Concave (Type-C)</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h3 class="text-sm font-semibold text-gray-400 mb-2">Finish Options</h3>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center text-sm">
+                                        <span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
+                                        <span>Hyper Silver</span>
+                                    </li>
+                                    <li class="flex items-center text-sm">
+                                        <span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
+                                        <span>Brush Finish</span>
+                                    </li>
+                                    <li class="flex items-center text-sm">
+                                        <span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
+                                        <span>Chrome</span>
+                                    </li>
+                                    <li class="flex items-center text-sm">
+                                        <span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
+                                        <span>Gold</span>
+                                    </li>
+                                    <li class="flex items-center text-sm">
+                                        <span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
+                                        <span>Custom Paint Available</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h3 class="text-sm font-semibold text-gray-400 mb-2">Special Features</h3>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center text-sm">
+                                        <span class="w-2 h-2 bg-pink-400 rounded-full mr-2"></span>
+                                        <span>Forged aluminum construction</span>
+                                    </li>
+                                    <li class="flex items-center text-sm">
+                                        <span class="w-2 h-2 bg-pink-400 rounded-full mr-2"></span>
+                                        <span>Reverse mount compatible</span>
+                                    </li>
+                                    <li class="flex items-center text-sm">
+                                        <span class="w-2 h-2 bg-pink-400 rounded-full mr-2"></span>
+                                        <span>JWL/VIA certified</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- History & Legacy -->
+                    <div class="glass rounded-2xl p-6 fade-in" style="animation-delay: 0.3s">
+                        <h2 class="text-2xl font-bold mb-4 flex items-center">
+                            <span class="text-2xl mr-2">📜</span>
+                            History & Legacy
+                        </h2>
+
+                        <div class="space-y-3 text-gray-300 text-sm leading-relaxed">
+                            <p>
+                                The Weds Kranze Cerberus I was introduced in 2005 as part of Kranze's premium wheel lineup,
+                                designed specifically for VIP and luxury sport sedans. Named after the three-headed mythological
+                                guardian, the design featured a distinctive three-spoke pattern with intricate detailing.
+                            </p>
+                            <p>
+                                This wheel became particularly popular in the Japanese VIP scene, often seen on Toyota Crown,
+                                Nissan Cima, and luxury German sedans. The Cerberus I was known for its aggressive deep-dish
+                                capability and lightweight forged construction.
+                            </p>
+                            <p>
+                                Production ceased in 2010, making way for the Cerberus II which featured updated styling.
+                                Original Cerberus I wheels are now highly sought after by collectors and enthusiasts of
+                                early 2000s VIP culture.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Common Fitments -->
+                    <div class="glass rounded-2xl p-6 fade-in" style="animation-delay: 0.4s">
+                        <h2 class="text-2xl font-bold mb-4 flex items-center">
+                            <span class="text-2xl mr-2">🚗</span>
+                            Common Fitments
+                        </h2>
+
+                        <div class="space-y-4">
+                            <div>
+                                <h3 class="font-semibold text-blue-300 mb-2">Toyota</h3>
+                                <div class="space-y-1 text-sm text-gray-300">
+                                    <p>• Crown Majesta: 19x9.5 +22 / 19x10.5 +12</p>
+                                    <p>• Aristo: 18x9.5 +18 / 18x10.5 +8</p>
+                                    <p>• Celsior: 19x9.5 +25 / 19x10.5 +15</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h3 class="font-semibold text-purple-300 mb-2">Lexus</h3>
+                                <div class="space-y-1 text-sm text-gray-300">
+                                    <p>• LS400/430: 19x9.5 +25 / 19x10.5 +15</p>
+                                    <p>• GS300/430: 19x9.5 +22 / 19x10.5 +12</p>
+                                    <p>• SC300/400: 18x9.5 +18 / 18x10.5 +8</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h3 class="font-semibold text-pink-300 mb-2">Nissan</h3>
+                                <div class="space-y-1 text-sm text-gray-300">
+                                    <p>• Cima: 19x9.5 +25 / 19x11 +15</p>
+                                    <p>• Fuga: 19x9.5 +22 / 19x10.5 +12</p>
+                                    <p>• President: 19x9.5 +28 / 19x10.5 +18</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Additional Notes -->
+                <div class="glass rounded-2xl p-6 mt-8 fade-in" style="animation-delay: 0.5s">
+                    <h2 class="text-2xl font-bold mb-4 flex items-center">
+                        <span class="text-2xl mr-2">💡</span>
+                        Collector's Notes
+                    </h2>
+                    <div class="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-4">
+                        <p class="text-sm text-gray-300 leading-relaxed">
+                            <strong class="text-yellow-300">Authenticity:</strong> Due to the rarity of genuine Cerberus I wheels,
+                            replicas are common. Authentic wheels will have "Kranze" and "Weds" markings on the inner barrel,
+                            serial numbers on the face, and JWL/VIA stamps. Original center caps featured the iconic Cerberus
+                            three-headed dog logo. Expect to pay $3,000-$6,000 USD for a used set in good condition as of 2025.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="../sidebar.js"></script>
+</body>
+</html>

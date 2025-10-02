@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wheel Offset Calculator | Three-Piece Wheels</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        dark: '#0f172a',
+                        'dark-light': '#1e293b',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-dark via-dark-light to-slate-900 min-h-screen text-white">
+
+    <!-- Mobile Menu Toggle -->
+    <button id="mobileMenuBtn" class="fixed top-4 left-4 z-50 lg:hidden glass p-3 rounded-lg">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+    </button>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="fixed left-0 top-0 h-full w-80 glass border-r border-gray-700 z-40 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 overflow-y-auto">
+        <div class="p-6">
+            <h2 class="text-2xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-400 text-transparent bg-clip-text">JDM Wheels Archive</h2>
+            <p class="text-xs text-gray-400 mb-6">Classic & Discontinued Wheels</p>
+
+            <!-- Navigation -->
+            <nav class="space-y-1">
+                <a href="index.html" class="block px-4 py-2.5 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-300 font-medium transition-all">
+                    🧮 Offset Calculator
+                </a>
+
+                <!-- Manufacturers -->
+                <div class="mt-6">
+                    <h3 class="text-xs uppercase text-gray-500 font-semibold mb-2 px-4">Manufacturers</h3>
+
+                    <div class="space-y-1">
+                        <button onclick="toggleManufacturer('work')" class="w-full text-left px-4 py-2 rounded-lg hover:bg-white/5 transition-all flex items-center justify-between group">
+                            <span class="font-medium">Work Wheels</span>
+                            <svg class="w-4 h-4 transform transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                        <div id="work-wheels" class="hidden pl-4 space-y-1">
+                            <a href="wheels/work-vs-kf.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">VS-KF</a>
+                            <a href="wheels/work-vs-xx.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">VS-XX</a>
+                            <a href="wheels/work-meister-s1.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">Meister S1</a>
+                        </div>
+
+                        <button onclick="toggleManufacturer('weds')" class="w-full text-left px-4 py-2 rounded-lg hover:bg-white/5 transition-all flex items-center justify-between group">
+                            <span class="font-medium">Weds / Kranze</span>
+                            <svg class="w-4 h-4 transform transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                        <div id="weds-wheels" class="hidden pl-4 space-y-1">
+                            <a href="wheels/weds-kranze-cerberus-i.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">Kranze Cerberus I</a>
+                            <a href="wheels/weds-kranze-cerberus-ii.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">Kranze Cerberus II</a>
+                            <a href="wheels/weds-kranze-bazreia.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">Kranze Bazreia</a>
+                        </div>
+
+                        <button onclick="toggleManufacturer('ssr')" class="w-full text-left px-4 py-2 rounded-lg hover:bg-white/5 transition-all flex items-center justify-between group">
+                            <span class="font-medium">SSR</span>
+                            <svg class="w-4 h-4 transform transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                        <div id="ssr-wheels" class="hidden pl-4 space-y-1">
+                            <a href="wheels/ssr-professor-sp1.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">Professor SP1</a>
+                            <a href="wheels/ssr-professor-sp3.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">Professor SP3</a>
+                            <a href="wheels/ssr-vienna-merisia.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">Vienna Merisia</a>
+                        </div>
+
+                        <button onclick="toggleManufacturer('rays')" class="w-full text-left px-4 py-2 rounded-lg hover:bg-white/5 transition-all flex items-center justify-between group">
+                            <span class="font-medium">Rays Engineering</span>
+                            <svg class="w-4 h-4 transform transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                        <div id="rays-wheels" class="hidden pl-4 space-y-1">
+                            <a href="wheels/rays-volk-ce28n.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">Volk CE28N</a>
+                            <a href="wheels/rays-volk-gt-c.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">Volk GT-C</a>
+                        </div>
+
+                        <button onclick="toggleManufacturer('bbs')" class="w-full text-left px-4 py-2 rounded-lg hover:bg-white/5 transition-all flex items-center justify-between group">
+                            <span class="font-medium">BBS</span>
+                            <svg class="w-4 h-4 transform transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                        <div id="bbs-wheels" class="hidden pl-4 space-y-1">
+                            <a href="wheels/bbs-lm.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">LM</a>
+                            <a href="wheels/bbs-rs.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">RS</a>
+                        </div>
+
+                        <button onclick="toggleManufacturer('hotstuff')" class="w-full text-left px-4 py-2 rounded-lg hover:bg-white/5 transition-all flex items-center justify-between group">
+                            <span class="font-medium">Hotstuff</span>
+                            <svg class="w-4 h-4 transform transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                        <div id="hotstuff-wheels" class="hidden pl-4 space-y-1">
+                            <a href="wheels/hotstuff-stich-gulf.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">Stich Gulf</a>
+                            <a href="wheels/hotstuff-cross-speed.html" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">Cross Speed</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search -->
+                <div class="mt-6 pt-6 border-t border-gray-700">
+                    <input type="text" id="wheelSearch" placeholder="Search wheels..."
+                           class="w-full px-4 py-2 rounded-lg bg-slate-800 border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none text-sm transition-all">
+                </div>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="lg:ml-80 min-h-screen">
+        <div class="container mx-auto px-4 py-12">
+        <div class="text-center mb-16 fade-in-up">
+            <h1 class="text-6xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-transparent bg-clip-text">
+                Wheel Offset Calculator
+            </h1>
+            <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                Calculate the perfect offset for your three-piece wheels with precision and ease
+            </p>
+        </div>
+
+        <!-- Calculator Card -->
+        <div class="max-w-4xl mx-auto glass rounded-3xl p-8 shadow-2xl fade-in-up" style="animation-delay: 0.2s">
+
+            <!-- Step Indicator -->
+            <div class="flex justify-between mb-12">
+                <div class="flex-1 text-center">
+                    <div id="step1-indicator" class="w-12 h-12 mx-auto rounded-full bg-blue-500 flex items-center justify-center text-white font-bold mb-2 transition-all">1</div>
+                    <p class="text-sm text-gray-400">Wheel Size</p>
+                </div>
+                <div class="flex-1 flex items-center justify-center">
+                    <div class="h-1 w-full bg-gray-700"></div>
+                </div>
+                <div class="flex-1 text-center">
+                    <div id="step2-indicator" class="w-12 h-12 mx-auto rounded-full bg-gray-700 flex items-center justify-center text-white font-bold mb-2 transition-all">2</div>
+                    <p class="text-sm text-gray-400">Barrel Width</p>
+                </div>
+                <div class="flex-1 flex items-center justify-center">
+                    <div class="h-1 w-full bg-gray-700"></div>
+                </div>
+                <div class="flex-1 text-center">
+                    <div id="step3-indicator" class="w-12 h-12 mx-auto rounded-full bg-gray-700 flex items-center justify-center text-white font-bold mb-2 transition-all">3</div>
+                    <p class="text-sm text-gray-400">Face Position</p>
+                </div>
+                <div class="flex-1 flex items-center justify-center">
+                    <div class="h-1 w-full bg-gray-700"></div>
+                </div>
+                <div class="flex-1 text-center">
+                    <div id="step4-indicator" class="w-12 h-12 mx-auto rounded-full bg-gray-700 flex items-center justify-center text-white font-bold mb-2 transition-all">4</div>
+                    <p class="text-sm text-gray-400">Results</p>
+                </div>
+            </div>
+
+            <!-- Step 1: Wheel Diameter and Total Width -->
+            <div id="step1" class="step-content">
+                <h2 class="text-3xl font-bold mb-6 text-center">Step 1: Wheel Specifications</h2>
+                <p class="text-gray-400 text-center mb-8">Enter your wheel diameter and total assembled width</p>
+
+                <div class="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                    <div>
+                        <label class="block text-sm font-medium mb-2 text-gray-300">Wheel Diameter (inches)</label>
+                        <input type="number" id="wheelDiameter" step="0.5" placeholder="e.g., 18"
+                               class="w-full px-4 py-3 rounded-lg bg-slate-800 border border-gray-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all">
+                        <p class="text-xs text-gray-500 mt-1">Common: 17, 18, 19, 20"</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-2 text-gray-300">Total Wheel Width (inches)</label>
+                        <input type="number" id="totalWidth" step="0.5" placeholder="e.g., 9.5"
+                               class="w-full px-4 py-3 rounded-lg bg-slate-800 border border-gray-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all">
+                        <p class="text-xs text-gray-500 mt-1">Assembled wheel width</p>
+                    </div>
+                </div>
+
+                <div class="flex justify-end mt-8">
+                    <button onclick="nextStep(2)" class="px-8 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg font-semibold transition-all transform hover:scale-105">
+                        Next Step →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Inner and Outer Barrel Width -->
+            <div id="step2" class="step-content hidden">
+                <h2 class="text-3xl font-bold mb-6 text-center">Step 2: Barrel Widths</h2>
+                <p class="text-gray-400 text-center mb-8">Specify the inner and outer barrel widths</p>
+
+                <div class="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                    <div>
+                        <label class="block text-sm font-medium mb-2 text-gray-300">Inner Barrel Width (inches)</label>
+                        <input type="number" id="innerBarrel" step="0.25" placeholder="e.g., 5.5"
+                               class="w-full px-4 py-3 rounded-lg bg-slate-800 border border-gray-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all">
+                        <p class="text-xs text-gray-500 mt-1">Inside barrel section</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-2 text-gray-300">Outer Barrel Width (inches)</label>
+                        <input type="number" id="outerBarrel" step="0.25" placeholder="e.g., 4.0"
+                               class="w-full px-4 py-3 rounded-lg bg-slate-800 border border-gray-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all">
+                        <p class="text-xs text-gray-500 mt-1">Outside barrel section</p>
+                    </div>
+                </div>
+
+                <div class="flex justify-between mt-8">
+                    <button onclick="previousStep(1)" class="px-8 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-semibold transition-all">
+                        ← Back
+                    </button>
+                    <button onclick="nextStep(3)" class="px-8 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg font-semibold transition-all transform hover:scale-105">
+                        Next Step →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 3: Face/Center Position -->
+            <div id="step3" class="step-content hidden">
+                <h2 class="text-3xl font-bold mb-6 text-center">Step 3: Face Position</h2>
+                <p class="text-gray-400 text-center mb-8">Measure the distance from the mounting face to the inner barrel edge</p>
+
+                <div class="max-w-md mx-auto">
+                    <div>
+                        <label class="block text-sm font-medium mb-2 text-gray-300">Face to Inner Barrel (inches)</label>
+                        <input type="number" id="facePosition" step="0.125" placeholder="e.g., 6.0"
+                               class="w-full px-4 py-3 rounded-lg bg-slate-800 border border-gray-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all">
+                        <p class="text-xs text-gray-500 mt-1">Distance from mounting face to inner edge</p>
+                    </div>
+
+                    <div class="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4 mt-6">
+                        <h4 class="font-semibold text-blue-300 mb-2">💡 Measurement Tip</h4>
+                        <p class="text-sm text-gray-300">Place the wheel face-down and measure from the mounting surface to the inner barrel lip using a straight edge and ruler.</p>
+                    </div>
+                </div>
+
+                <div class="flex justify-between mt-8">
+                    <button onclick="previousStep(2)" class="px-8 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-semibold transition-all">
+                        ← Back
+                    </button>
+                    <button onclick="calculateOffset()" class="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 rounded-lg font-semibold transition-all transform hover:scale-105">
+                        Calculate Offset
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 4: Results -->
+            <div id="step4" class="step-content hidden">
+                <h2 class="text-3xl font-bold mb-6 text-center">Your Wheel Offset</h2>
+
+                <div class="max-w-2xl mx-auto">
+                    <!-- Main Result -->
+                    <div class="bg-gradient-to-r from-blue-500/20 to-purple-500/20 border-2 border-blue-500 rounded-2xl p-8 mb-8 text-center">
+                        <p class="text-gray-300 mb-2">Calculated Offset</p>
+                        <div id="offsetResult" class="text-6xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 text-transparent bg-clip-text mb-2">
+                            --
+                        </div>
+                        <p class="text-gray-400">millimeters</p>
+                    </div>
+
+                    <!-- Detailed Breakdown -->
+                    <div class="grid md:grid-cols-2 gap-4 mb-8">
+                        <div class="bg-slate-800/50 rounded-xl p-6 border border-gray-700">
+                            <p class="text-sm text-gray-400 mb-1">Offset (inches)</p>
+                            <p id="offsetInches" class="text-2xl font-bold text-blue-400">--</p>
+                        </div>
+                        <div class="bg-slate-800/50 rounded-xl p-6 border border-gray-700">
+                            <p class="text-sm text-gray-400 mb-1">Centerline</p>
+                            <p id="centerline" class="text-2xl font-bold text-purple-400">--</p>
+                        </div>
+                        <div class="bg-slate-800/50 rounded-xl p-6 border border-gray-700">
+                            <p class="text-sm text-gray-400 mb-1">Backspacing</p>
+                            <p id="backspacing" class="text-2xl font-bold text-pink-400">--</p>
+                        </div>
+                        <div class="bg-slate-800/50 rounded-xl p-6 border border-gray-700">
+                            <p class="text-sm text-gray-400 mb-1">Offset Type</p>
+                            <p id="offsetType" class="text-2xl font-bold text-green-400">--</p>
+                        </div>
+                    </div>
+
+                    <!-- Formula Explanation -->
+                    <div class="bg-slate-800/30 border border-gray-700 rounded-xl p-6">
+                        <h4 class="font-semibold text-blue-300 mb-3">📐 Calculation Details</h4>
+                        <div id="calculationSteps" class="text-sm text-gray-300 space-y-2">
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between mt-8">
+                        <button onclick="resetCalculator()" class="px-8 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-semibold transition-all">
+                            ← Start Over
+                        </button>
+                        <button onclick="window.print()" class="px-8 py-3 bg-green-500 hover:bg-green-600 rounded-lg font-semibold transition-all">
+                            Print Results 🖨️
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Info Section -->
+        <div class="max-w-4xl mx-auto mt-12 grid md:grid-cols-3 gap-6">
+            <div class="glass rounded-2xl p-6">
+                <div class="text-3xl mb-3">📏</div>
+                <h3 class="font-bold text-lg mb-2">Precision Calculation</h3>
+                <p class="text-sm text-gray-400">Get accurate offset measurements for your custom three-piece wheel builds</p>
+            </div>
+            <div class="glass rounded-2xl p-6">
+                <div class="text-3xl mb-3">⚡</div>
+                <h3 class="font-bold text-lg mb-2">Quick & Easy</h3>
+                <p class="text-sm text-gray-400">Step-by-step guidance makes complex calculations simple</p>
+            </div>
+            <div class="glass rounded-2xl p-6">
+                <div class="text-3xl mb-3">🎯</div>
+                <h3 class="font-bold text-lg mb-2">Detailed Results</h3>
+                <p class="text-sm text-gray-400">See offset, backspacing, and centerline measurements</p>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="calculator.js"></script>
+    <script src="sidebar.js"></script>
+</body>
+</html>
